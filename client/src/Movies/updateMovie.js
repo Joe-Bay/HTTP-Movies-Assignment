@@ -37,20 +37,21 @@ const handleSubmit = (e) => {
     axios.put(`http://localhost:5000/api/movies/${id}`, movieValues)
     .then(res => {
         console.log(res)
-        // const newArr = props.movieList.map(movie => {
-        //     if(movie.id === res.data.id){
-        //         // props.movieList.splice([id], 1, res.data)
-        //         return res.data
-        //     }
-        //     else {
-        //         return movie
-        //     }
-        // })
-        const filterArray=props.movieList.filter(item => {
-            return item.id !== res.data.id
+        const newArr = props.movieList.map(movie => {
+            if(movie.id === res.data.id){
+
+                return res.data
+            }
+            else {
+                return movie
+            }
         })
-        filterArray.unshift(res.data)
-        props.setMovieList(filterArray)
+        props.setMovieList(newArr)
+        // const filterArray=props.movieList.filter(item => {
+        //     return item.id !== res.data.id
+        // })
+        // filterArray.unshift(res.data)
+        // props.setMovieList(filterArray)
         history.push('/')
     })
     .catch(err => console.log(err))
