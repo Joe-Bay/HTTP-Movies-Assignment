@@ -6,7 +6,7 @@ const initialMovie = {
     title: '',
     director: '',
     metascore: '',
-    stars: []
+    stars: [],
 }
 
 const UpdateMovie = (props) => {
@@ -37,15 +37,21 @@ const handleSubmit = (e) => {
     axios.put(`http://localhost:5000/api/movies/${id}`, movieValues)
     .then(res => {
         console.log(res)
-        const newArr = props.movieList.map(movie => {
-            if(movie.id === res.data.id){
-                props.movieList.splice([id], 1, res.data)
-            }
-            else {
-                return movie
-            }
-            history.push('/')
+        // const newArr = props.movieList.map(movie => {
+        //     if(movie.id === res.data.id){
+        //         // props.movieList.splice([id], 1, res.data)
+        //         return res.data
+        //     }
+        //     else {
+        //         return movie
+        //     }
+        // })
+        const filterArray=props.movieList.filter(item => {
+            return item.id !== res.data.id
         })
+        filterArray.unshift(res.data)
+        props.setMovieList(filterArray)
+        history.push('/')
     })
     .catch(err => console.log(err))
 
@@ -54,7 +60,8 @@ const handleSubmit = (e) => {
 
     return (
         <div className='form-container'>
-            <form onSubmit={handleSubmit}>
+            <form className='form-inputs'onSubmit={handleSubmit}>
+                <h2>Update Movie</h2>
                 <input 
                 type='text'
                 name='title'
@@ -76,13 +83,13 @@ const handleSubmit = (e) => {
                 onChange={handleChanges}
                 value={movieValues.metascore}
                 />
-                <input 
+                {/* <input 
                 type='text'
                 name='stars'
                 placeholder='stars'
                 onChange={handleChanges}
                 value={movieValues.stars}
-                />        
+                />         */}
                 <button>Submit Changes</button>                                       
             </form>
         </div>

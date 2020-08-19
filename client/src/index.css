@@ -75,3 +75,32 @@ body {
   color: red;
   text-align: center;
 }
+.form-inputs{
+display:flex;
+flex-direction: column;
+flex-wrap:wrap;
+justify-content: center;
+align-content: center;
+background-color: lightgray;
+border: 1px solid black;
+box-shadow: 3px 2px;
+border-radius: 10px;
+margin-right: 35%;
+margin-left: 35%;
+padding-top: 2.5%;
+padding-bottom: 2.5%;
+text-align: center;
+
+
+}
+.form-inputs button {
+  margin: 0 auto
+}
+
+.form-inputs input{
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  width: 50%;
+
+
+}
